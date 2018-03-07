@@ -23,7 +23,7 @@ fn first_word_slice(s: &String) -> &str {
             return &s[0..i];
         }
     }
-    return &s[..];
+    return &s[..]; // Return a slice
 }
 
 fn second_word(s: &String) -> (usize,usize) {
