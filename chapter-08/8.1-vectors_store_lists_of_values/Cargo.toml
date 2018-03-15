@@ -1,0 +1,6 @@
+[package]
+name = "vectors_store_lists_of_values"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
