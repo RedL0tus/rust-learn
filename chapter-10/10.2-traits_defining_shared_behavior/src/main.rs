@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 // Example 1: Tweet & article
 pub trait Summarizable { // Defining trait
     fn author_summary(&self) -> String;
@@ -54,6 +56,31 @@ fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     return largest;
 }
 
+// Example 3: Using Trait Bounds to Conditionally Implement Methods
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self {
+            x,
+            y,
+        }
+    }
+}
+
+impl<T: Display + PartialOrd> Pair<T> { // Only implement to the inner types with Display and PartialOrd traits
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
+
 fn main() {
     // Example 1
     let article = NewsArticle {
@@ -81,4 +108,11 @@ fn main() {
     let char_list = vec!['y', 'm', 'a', 'q'];
     let result = largest(&char_list);
     println!("The largest char is {}", result);
+
+    // Example 3
+    let pair = Pair::new(1, 2);
+    pair.cmp_display();
+
+    // let pair = Pair::new(vec![1,2,3], vec![4,5,6]);
+    // pair.cmp_display(); // Will fail, because vec! doesn't satisify Display.
 }
