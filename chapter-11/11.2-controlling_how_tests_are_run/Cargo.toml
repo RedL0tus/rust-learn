@@ -1,0 +1,6 @@
+[package]
+name = "controlling_how_tests_are_run"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
