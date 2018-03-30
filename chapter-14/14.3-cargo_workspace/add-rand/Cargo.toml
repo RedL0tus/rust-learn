@@ -1,0 +1,7 @@
+[package]
+name = "add-rand"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
+rand = "^0" # Add external dependencies to cargo workspace
