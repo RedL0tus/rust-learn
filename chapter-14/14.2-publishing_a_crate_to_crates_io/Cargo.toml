@@ -1,0 +1,12 @@
+[package]
+name = "publishing_a_crate_to_crates_io"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+description = "Yet another example crate."
+# Use `OR` for multiple license
+license = "WTFPL or GPL-3.0-or-later"
+# Use `cargo publish` to publish the crate to crates.io
+# Use `cargo yank --vers X.X.X` to delete sepecific version on crates.io
+# Use `cargo yank --vers X.X.X --undo` to revert.
+
+[dependencies]
