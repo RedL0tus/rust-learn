@@ -1,0 +1,12 @@
+[package]
+name = "customizing_builds_with_release_profiles"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
+
+[dependencies]
