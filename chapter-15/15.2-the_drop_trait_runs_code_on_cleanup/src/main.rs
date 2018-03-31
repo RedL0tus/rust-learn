@@ -1,8 +1,11 @@
-struct CustomSmartPointer {
-    data: String,
+use std::fmt::Display;
+
+struct CustomSmartPointer<T: Display> {
+    data: T,
 }
 
-impl Drop for CustomSmartPointer {
+impl<T> Drop for CustomSmartPointer<T> 
+    where T: Display {
     fn drop(&mut self) {
         println!("Dropping CustomSmartPointer with data `{}`!", self.data);
     }
