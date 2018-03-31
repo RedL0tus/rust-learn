@@ -1,0 +1,6 @@
+[package]
+name = "reference_cycles_can_leak_memory"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
