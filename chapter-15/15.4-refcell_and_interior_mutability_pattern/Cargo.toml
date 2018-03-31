@@ -1,0 +1,6 @@
+[package]
+name = "refcell_and_interior_mutability_pattern"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
