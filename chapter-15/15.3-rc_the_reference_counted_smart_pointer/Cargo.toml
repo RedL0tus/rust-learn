@@ -1,0 +1,6 @@
+[package]
+name = "rc_the_reference_counted_smart_pointer"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
