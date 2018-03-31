@@ -1,0 +1,4 @@
+[[package]]
+name = "treating_smart_pointers_like_regular_references_with_the_deref_trait"
+version = "0.1.0"
+
