@@ -1,0 +1,6 @@
+[package]
+name = "all_the_places_patterns_may_be_used"
+version = "0.1.0"
+authors = ["Kay <redl0tus@noreply.github.com>"]
+
+[dependencies]
