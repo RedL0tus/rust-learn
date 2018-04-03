@@ -63,6 +63,7 @@ fn main() {
         }
         // Destructuring Enums
         {
+            #[allow(dead_code)]
             enum Message {
                 Quit,
                 Move { x: i32, y: i32 },
@@ -92,6 +93,130 @@ fn main() {
                     )
                 }
             }
+        }
+        struct Point { x: i32, y: i32 }; // Needed for the next two parts
+        // Destructuring References
+        {
+            let points = vec![
+                Point { x: 0, y: 0 },
+                Point { x: 1, y: 5 },
+                Point { x: 10, y: -3 },
+            ];
+
+            let sum_of_squares: i32 = points
+                .iter()
+                .map(|&Point { x, y }| x * x + y * y)
+                .sum();
+            println!("The sum is: {}.", sum_of_squares);
+        }
+        // Destructing Structs and Tuples
+        {
+            let ((feet, inches), Point {x, y}) = ((3, 10), Point { x: 3, y: -10 });
+            println!("Feet = {}, inches = {}, the point is at x = {}, y = {}.", feet, inches, x, y);
+        }
+    }
+    // Ignoring Values in a Pattern
+    {
+        // Ignoring an Entire Value with `_`
+        {
+            fn foo(_: i32, y: i32) {
+                println!("This code only uses the y parameter: {}.", y);
+            }
+
+            foo(3, 4);
+        }
+        // Ignoring Parts of a Value with a Nested `_`
+        {
+            let mut setting_value = Some(5);
+            let new_setting_value = Some(10);
+
+            match (setting_value, new_setting_value) {
+                (Some(_), Some(_)) => {
+                    println!("Can't overwrite an existing customized value");
+                }
+                _ => {
+                    setting_value = new_setting_value;
+                }
+            }
+
+            println!("setting is {:?}", setting_value);
+        }
+        // Ignoring an Unused Variable by Starting its name with an Underscore
+        {
+            let _x = Some(String::from("Hello!")); // It will be ignored.
+            if let Some(_s) = _x {
+                println!("Found a string: {:?}", _s);
+            }
+        }
+        // Ignoring Remaining Parts of a Value with `..`
+        {
+            #[allow(dead_code)]
+            struct Point {
+                x: i32,
+                y: i32,
+                z: i32,
+            }
+            let origin = Point { x: 0, y: 0, z: 0 };
+            match origin {
+                Point { x, .. } => println!("x = {}", x),
+            }
+
+            let numbers = (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024);
+            match numbers {
+                (first, .., last) => {
+                    println!("Some numbers: {}, {}", first, last);
+                }
+            }
+        }
+    }
+    // `ref` and `ref mut` to Create References in Patterns
+    {
+        let mut robot_name = Some(String::from("Bors"));
+        match robot_name {
+            Some(ref name) => println!("Found a name: {}", name),
+            None => (),
+        }
+        match robot_name {
+            Some(ref mut name) => *name = String::from("Yet another name"),
+            None => (),
+        }
+        println!("Robot name is: {:?}.", robot_name);
+    }
+    // Extra Conditionals with Match Guards
+    {
+        let num = Some(4);
+        match num {
+            Some(x) if x < 5 => println!("Less than five: {}", x),
+            Some(x) => println!("{}", x),
+            _ => (),
+        }
+
+        // Combining multiple patterns with a match guard
+        let x = 4;
+        let y = false;
+        match x {
+            4 | 5 | 6 if y => println!("Yay!"), // Equal to `(4 | 5 | 6) if y`
+            _ => println!("Nan."),
+        }
+    }
+    // `@` Bindings
+    {
+        enum Message {
+            Hello { id: i32 },
+        }
+
+        let msg = Message::Hello { id: 5 };
+
+        match msg {
+            Message::Hello { id: id_variable @ 3...7 } => { // Use `@` to bind a value in a pattern while also tesing it
+                println!("Found an id in range: {}", id_variable)
+            },
+            Message::Hello { id: 10...12 } => {
+                println!("Found an id in another range")
+            },
+            Message::Hello { id } => {
+                println!("Found some other id: {}", id)
+            },
         }
     }
 }
