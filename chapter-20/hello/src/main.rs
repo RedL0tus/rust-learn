@@ -15,6 +15,7 @@ fn main() {
         Err(_) => panic!("Pool creation failed"),
     };
 
+    // for stream in listener.incoming().take(2) {
     for stream in listener.incoming() {
         let stream = stream.unwrap();
         
@@ -22,6 +23,8 @@ fn main() {
             handle_connection(stream);
         });
     }
+
+    println!("Shutting down.");
 }
 
 fn handle_connection(mut stream: TcpStream) {
